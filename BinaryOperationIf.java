@@ -1,4 +1,4 @@
-package calculator;
+package calculator.BinaryOperations;
 
 /**
  * An abstract class for binary operations.

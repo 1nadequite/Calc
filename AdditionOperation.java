@@ -1,4 +1,4 @@
-package calculator;
+package calculator.BinaryOperations;
 
 /**
  * Addition operation implements addition against two values.
