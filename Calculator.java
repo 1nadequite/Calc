@@ -11,7 +11,9 @@ public class Calculator {
         int calculatorType;
         while (true) {
             calculatorType = reader.nextInt();
-            if (CalculatorType.isValidType(calculatorType)) break;
+            if (CalculatorType.isValidType(calculatorType)) {
+                break;
+            }
             System.out.println("Incorrect calculator type. Type has to be between 1 and 4");
         }
 

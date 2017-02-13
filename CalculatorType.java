@@ -38,7 +38,7 @@ public enum CalculatorType {
     public static String calculatorName(int value) { return namesByValue.get(value); }
 
     // check if calculator type exists
-    public static boolean isValidType(int value) { return (typesByValue.get(value) != null) ? true : false; }
+    public static boolean isValidType(int value) { return typesByValue.get(value) != null; }
 
     private final int value;
 }
