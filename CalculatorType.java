@@ -13,9 +13,7 @@ public enum CalculatorType {
     ENGINEERING(3),
     ENGINEERING_WITH_MEMORY(4);
 
-    CalculatorType(int value) {
-        this.value = value;
-    }
+    CalculatorType(int value) { this.value = value; }
 
     private static final HashMap<Integer, CalculatorType> typesByValue = new HashMap<Integer, CalculatorType>();
     private static final HashMap<Integer, String> namesByValue = new HashMap<Integer, String>();
