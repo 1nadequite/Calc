@@ -1,0 +1,6 @@
+Engineering Calculator with Memory
+16.0
+8.0
+32.0
+40.0
+-0.6669380616522619
