@@ -1,11 +1,5 @@
 package calculator;
 
-import calculator.CalculatorTypes.ArithmeticCalculator;
-import calculator.Types.UnaryOperationType;
-import calculator.UnaryOperations.CosOperation;
-import calculator.UnaryOperations.ExpOperation;
-import calculator.UnaryOperations.SquareOperation;
-
 /**
  * Engineering calculator has the all arithmetic operations
  * and following unary operations:

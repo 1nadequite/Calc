@@ -1,4 +1,4 @@
-package calculator.BinaryOperations;
+package calculator;
 
 /**
  * Multiply operation implements multiply between two values;

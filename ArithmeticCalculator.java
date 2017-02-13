@@ -1,10 +1,5 @@
 package calculator;
 
-import calculator.BinaryOperations.AdditionOperation;
-import calculator.BinaryOperations.DivideOperation;
-import calculator.BinaryOperations.MultiplyOperation;
-import calculator.BinaryOperations.SubtractOperation;
-
 /**
  * Arithmetic calculator has following binary operations:
  * - addition("+");
