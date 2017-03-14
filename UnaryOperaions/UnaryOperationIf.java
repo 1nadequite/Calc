@@ -1,4 +1,4 @@
-package calculator;
+package calculator.UnaryOperaions;
 
 /**
  * An abstract class for unary operations.

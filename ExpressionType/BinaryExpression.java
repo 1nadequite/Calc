@@ -1,7 +1,10 @@
-package calculator;
+package calculator.ExpressionType;
 
-public class BinaryExpressionType implements ExpressionType {
-    BinaryExpressionType(double left, BinaryOperationType op, double right) {
+/**
+ * Structure for binary expression.
+ */
+public class BinaryExpression implements Expression {
+    public BinaryExpression(double right, String op, double left) {
         this.left = left;
         this.op = op;
         this.right = right;
@@ -12,16 +15,14 @@ public class BinaryExpressionType implements ExpressionType {
         return left;
     }
     // get binary operation
-    public BinaryOperationType getOperation() {
-        return op;
-    }
+    @Override
+    public String getOperation() { return op; }
     // get right operand
     public double getRight() {
         return right;
     }
 
-
     private double left;
-    private BinaryOperationType op;
+    private String op;
     private double right;
 }

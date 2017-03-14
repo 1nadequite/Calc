@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.BinaryOperations.BinaryOperationIf;
+import calculator.ExpressionType.BinaryExpression;
+import calculator.ExpressionType.UnaryExpression;
+import calculator.UnaryOperaions.UnaryOperationIf;
+
 import java.util.HashMap;
 
 /**
@@ -8,32 +13,21 @@ import java.util.HashMap;
  */
 public class CalculatorImpl implements CalculatorIf {
     // execute unary operation if it exists
-    public void executeUnaryOperation(UnaryOperationType opType) {
-        if (unaryOperations.get(opType) != null) {
-            value = unaryOperations.get(opType).execute(value);
-        } else {
-            throw new IllegalArgumentException("Unavailable unary operation.");
-        }
+    @Override
+    public double executeUnaryOperation(UnaryExpression expType) {
+        UnaryOperationType op = OperationParser.maybeUnaryOperation(expType.getOperation());
+        return unaryOperations.get(op).execute(expType.getValue());
     }
 
     // execute binary operation if it exists
-    public void executeBinaryOperation(BinaryOperationType opType, double right) {
-        if (binaryOperations.get(opType) != null) {
-            value = binaryOperations.get(opType).execute(value, right);
-        } else {
-            throw new IllegalArgumentException("Unavailable binary operation.");
-        }
-    }
-
-    // return the current value
-    public double getValue() {
-        return value;
+    @Override
+    public double executeBinaryOperation(BinaryExpression expType) {
+        BinaryOperationType op = OperationParser.maybeBinaryOperation(expType.getOperation());
+        return binaryOperations.get(op).execute(expType.getLeft(), expType.getRight());
     }
 
     protected HashMap<UnaryOperationType, UnaryOperationIf> unaryOperations =
             new HashMap<UnaryOperationType, UnaryOperationIf>();
     protected HashMap<BinaryOperationType, BinaryOperationIf> binaryOperations =
             new HashMap<BinaryOperationType, BinaryOperationIf>();
-
-    private double value = 0.0;
 }

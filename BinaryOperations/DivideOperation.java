@@ -1,4 +1,4 @@
-package calculator;
+package calculator.BinaryOperations;
 
 /**
  * Divide operation divides the left value by the right value.

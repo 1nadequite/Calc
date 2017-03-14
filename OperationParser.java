@@ -13,18 +13,15 @@ public class OperationParser {
 
     // the all operations.
     static {
-        unaryOperations.put("MC", UnaryOperationType.MC);
-        unaryOperations.put("MS", UnaryOperationType.MS);
-        unaryOperations.put("M+", UnaryOperationType.MADD);
-        unaryOperations.put("M-", UnaryOperationType.MSUB);
+        unaryOperations.put("sin", UnaryOperationType.SIN);
         unaryOperations.put("cos", UnaryOperationType.COS);
-        unaryOperations.put("exp", UnaryOperationType.EXP);
-        unaryOperations.put("square", UnaryOperationType.SQUARE);
+        unaryOperations.put("√", UnaryOperationType.SQRT);
 
         binaryOperations.put("+", BinaryOperationType.ADDITION);
         binaryOperations.put("-", BinaryOperationType.SUBTRACT);
         binaryOperations.put("*", BinaryOperationType.MULTIPLY);
         binaryOperations.put("/", BinaryOperationType.DIVIDE);
+        binaryOperations.put("^", BinaryOperationType.POWER);
     }
 
     // verify if a unary operation exists

@@ -1,5 +1,13 @@
 package calculator;
 
+import calculator.CalculatorType.ArithmeticCalculator;
+import calculator.CalculatorType.CalculatorType;
+import calculator.CalculatorType.EngineeringCalculator;
+import calculator.CalculatorType.ImprovedArithmeticCalculator;
+import calculator.ExpressionType.BinaryExpression;
+import calculator.ExpressionType.Expression;
+import calculator.ExpressionType.UnaryExpression;
+
 import java.util.Scanner;
 
 /**
@@ -14,55 +22,68 @@ public class Calculator {
             if (CalculatorType.isValidType(calculatorType)) {
                 break;
             }
-            System.out.println("Incorrect calculator type. Type has to be between 1 and 4");
+            System.out.println("Incorrect calculator type(1 - arithmetic, 2 - improved arithmetic, 3 - engineering).");
         }
 
         CalculatorImpl calc = null;
-        Memory memory = null;
         switch (CalculatorType.forValue(calculatorType)) {
             case ARITHMETIC:
                 calc = new ArithmeticCalculator();
                 break;
-            case ARITHMETIC_WITH_MEMORY:
-                memory = new Memory();
-                calc = new ArithmeticCalculatorWithMemory(memory);
+            case IMPROVED_ARITHMETIC:
+                calc = new ImprovedArithmeticCalculator();
                 break;
             case ENGINEERING:
                 calc = new EngineeringCalculator();
                 break;
-            case ENGINEERING_WITH_MEMORY:
-                memory = new Memory();
-                calc = new EngineeringCalculatorWithMemory(memory);
-                break;
         }
         System.out.println(CalculatorType.calculatorName(calculatorType));
+        reader.nextLine();
 
-        BinaryOperationType previousBinaryOperation = BinaryOperationType.ADDITION;
+        String start_line = reader.nextLine();
+        Parser parsed_line = new Parser(start_line);
+        ExpressionParser exp = new ExpressionParser();
         while (true) {
             try {
-                String line = reader.next();
-                if (OperationParser.maybeUnaryOperation(line) != null) {
-                    calc.executeUnaryOperation(OperationParser.maybeUnaryOperation(line));
-                } else if (OperationParser.maybeBinaryOperation(line) != null) {
-                    previousBinaryOperation = OperationParser.maybeBinaryOperation(line);
-                } else if (line.equals("=")) {
-                    System.out.println(calc.getValue());
-                } else if (line.equals("exit")) {
-                    break;
-                } else if (line.equals("MR")) {
-                    if (memory == null) {
-                        throw new IllegalArgumentException("Unavailable operation");
+                String line = parsed_line.getNextValue();
+                double new_value;
+                Expression cur_exp;
+                UnaryExpression unary_exp;
+                if (line == null || line.equals(")") || OperationParser.maybeBinaryOperation(line) != null) {
+
+                    cur_exp = exp.getNextExpression(line);
+
+                    while (cur_exp != null) {
+                        if (OperationParser.maybeBinaryOperation(cur_exp.getOperation()) != null) {
+                            new_value = calc.executeBinaryOperation((BinaryExpression) cur_exp);
+                        } else {
+                            new_value = calc.executeUnaryOperation((UnaryExpression) cur_exp);
+                        }
+                        unary_exp = exp.addValue(new_value);
+                        if (unary_exp != null) {
+                            exp.addValue(calc.executeUnaryOperation(unary_exp));
+                        }
+                        cur_exp = (line == null || line.equals(")"))
+                                ? exp.getNextExpression(null)
+                                : exp.getNextExpression(line);
                     }
-                    double operand = memory.recall();
-                    calc.executeBinaryOperation(previousBinaryOperation, operand);
+
+                    if (line == null) {
+                        System.out.format("%s = %.5f", start_line, exp.getAnswer());
+                        break;
+                    }
+
+                } else if (OperationParser.maybeUnaryOperation(line) != null || line.equals("(")) {
+                    exp.addUnaryOperation(line);
                 } else {
-                    double operand = Double.parseDouble(line);
-                    calc.executeBinaryOperation(previousBinaryOperation, operand);
+                    unary_exp = exp.addValue(line);
+                    if (unary_exp != null) {
+                        exp.addValue(calc.executeUnaryOperation(unary_exp));
+                    }
                 }
-            } catch (NumberFormatException ex) {
-                System.out.format("Format exception(%s)\n", ex.getMessage());
             } catch (IllegalArgumentException ex) {
                 System.out.println(ex.getMessage());
+                break;
             }
         }
     }

@@ -1,6 +1,8 @@
-package calculator;
+package calculator.CalculatorType;
 
+import calculator.BinaryOperationType;
 import calculator.BinaryOperations.*;
+import calculator.CalculatorImpl;
 
 /**
  * Arithmetic calculator has following binary operations:
@@ -11,7 +13,7 @@ import calculator.BinaryOperations.*;
  * - power("^").
  */
 public class ArithmeticCalculator extends CalculatorImpl {
-    ArithmeticCalculator() {
+    public ArithmeticCalculator() {
         binaryOperations.put(BinaryOperationType.ADDITION, new AdditionOperation());
         binaryOperations.put(BinaryOperationType.SUBTRACT, new SubtractOperation());
         binaryOperations.put(BinaryOperationType.MULTIPLY, new MultiplyOperation());

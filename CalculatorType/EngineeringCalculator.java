@@ -1,8 +1,9 @@
-package calculator;
+package calculator.CalculatorType;
 
 import calculator.UnaryOperaions.CosOperation;
 import calculator.UnaryOperaions.SinOperation;
 import calculator.UnaryOperaions.SquareRootOperation;
+import calculator.UnaryOperationType;
 
 /**
  * Engineering calculator has the all arithmetic operations
@@ -12,7 +13,7 @@ import calculator.UnaryOperaions.SquareRootOperation;
  * - "sqrt".
  */
 public class EngineeringCalculator extends ArithmeticCalculator {
-    EngineeringCalculator() {
+    public EngineeringCalculator() {
         super();
 
         unaryOperations.put(UnaryOperationType.SIN, new SinOperation());

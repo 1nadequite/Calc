@@ -1,4 +1,4 @@
-package calculator;
+package calculator.UnaryOperaions;
 
 /**
  * Cos operation calculates the cos of a value;
@@ -6,6 +6,6 @@ package calculator;
 public class CosOperation implements UnaryOperationIf {
     @Override
     public double execute(double value) {
-        return Math.cos(value);
+        return Math.cos(Math.toRadians(value));
     }
 }

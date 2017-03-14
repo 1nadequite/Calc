@@ -4,11 +4,7 @@ package calculator;
  * Enum with the unary operations.
  */
 public enum UnaryOperationType {
+    SIN,
     COS,
-    EXP,
-    SQUARE,
-    MC,
-    MS,
-    MADD,
-    MSUB
+    SQRT
 }

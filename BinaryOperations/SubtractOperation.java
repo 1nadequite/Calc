@@ -1,4 +1,4 @@
-package calculator;
+package calculator.BinaryOperations;
 
 /**
  * Subtract operation implements subtract the right value from the left value;

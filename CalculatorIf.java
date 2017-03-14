@@ -1,7 +1,9 @@
 package calculator;
 
+import calculator.ExpressionType.BinaryExpression;
+import calculator.ExpressionType.UnaryExpression;
+
 public interface CalculatorIf {
-    void executeUnaryOperation(UnaryOperationType opType);
-    void executeBinaryOperation(BinaryOperationType opType, double right);
-    double getValue();
+    double executeUnaryOperation(UnaryExpression expType) throws IllegalArgumentException;
+    double executeBinaryOperation(BinaryExpression expType) throws IllegalArgumentException;
 }
