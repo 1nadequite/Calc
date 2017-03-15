@@ -9,12 +9,12 @@ public class UnaryExpression implements Expression {
         this.value = value;
     }
 
-    // get unary operation
+    // get the unary operation
     @Override
     public String getOperation() {
         return op;
     }
-    // get operand
+    // get the operand
     public double getValue() {
         return value;
     }

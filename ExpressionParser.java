@@ -22,9 +22,7 @@ public class ExpressionParser {
     }
 
     public UnaryExpression addValue(double value) {
-
         if (!operation.isEmpty() && !braces && OperationParser.maybeUnaryOperation(operation.peek()) != null) {
-            System.out.println(operation.peek());
             return new UnaryExpression(operation.pop(), value);
         } else {
             numbers.push(value);
@@ -72,7 +70,8 @@ public class ExpressionParser {
                 int prevPriority = BinaryOperationType.getPriority(OperationParser.maybeBinaryOperation(prevOpType));
                 int curPriority = BinaryOperationType.getPriority(OperationParser.maybeBinaryOperation(opType));
                 if (opType.equals(")") || (
-                        (prevPriority == 3 && prevPriority > curPriority) || (prevPriority != 3 && prevPriority >= curPriority)
+                                (prevPriority == 3 && prevPriority > curPriority) ||
+                                (prevPriority != 3 && prevPriority >= curPriority)
                 )) {
                     return new BinaryExpression(numbers.pop(), operation.pop(), numbers.pop());
                 }
@@ -86,7 +85,6 @@ public class ExpressionParser {
     public double getAnswer() { return numbers.pop(); }
 
     boolean braces = false;
-    boolean prevOp = false;
     private Stack<Double> numbers = new Stack<Double>();
     private Stack<String> operation = new Stack<String>();
 }

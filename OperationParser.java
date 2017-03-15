@@ -11,7 +11,7 @@ public class OperationParser {
     private static HashMap<String, BinaryOperationType> binaryOperations =
             new HashMap<String, BinaryOperationType>();
 
-    // the all operations.
+    // add the all operations.
     static {
         unaryOperations.put("sin", UnaryOperationType.SIN);
         unaryOperations.put("cos", UnaryOperationType.COS);

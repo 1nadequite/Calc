@@ -14,6 +14,7 @@ import calculator.CalculatorImpl;
  */
 public class ArithmeticCalculator extends CalculatorImpl {
     public ArithmeticCalculator() {
+        // add the all binary operations
         binaryOperations.put(BinaryOperationType.ADDITION, new AdditionOperation());
         binaryOperations.put(BinaryOperationType.SUBTRACT, new SubtractOperation());
         binaryOperations.put(BinaryOperationType.MULTIPLY, new MultiplyOperation());

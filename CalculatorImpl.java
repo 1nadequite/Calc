@@ -16,14 +16,22 @@ public class CalculatorImpl implements CalculatorIf {
     @Override
     public double executeUnaryOperation(UnaryExpression expType) {
         UnaryOperationType op = OperationParser.maybeUnaryOperation(expType.getOperation());
-        return unaryOperations.get(op).execute(expType.getValue());
+        if (unaryOperations.get(op) != null) {
+            return unaryOperations.get(op).execute(expType.getValue());
+        } else {
+            throw new IllegalArgumentException("Unavailable unary operation.");
+        }
     }
 
     // execute binary operation if it exists
     @Override
     public double executeBinaryOperation(BinaryExpression expType) {
         BinaryOperationType op = OperationParser.maybeBinaryOperation(expType.getOperation());
-        return binaryOperations.get(op).execute(expType.getLeft(), expType.getRight());
+        if (binaryOperations.get(op) != null) {
+            return binaryOperations.get(op).execute(expType.getLeft(), expType.getRight());
+        } else {
+            throw new IllegalArgumentException("Unavailable binary operation.");
+        }
     }
 
     protected HashMap<UnaryOperationType, UnaryOperationIf> unaryOperations =

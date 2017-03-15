@@ -20,10 +20,16 @@ public class Parser {
                     nextValue += expression_.charAt(position_);
                     position_++;
                 }
+                prevValue = nextValue;
                 return nextValue;
             } else if (cur_char == '+' || cur_char == '-' || cur_char == '/' || cur_char == '*' ||
                        cur_char == '^' || cur_char == '√' || cur_char == '(' || cur_char == ')') {
                 nextValue += cur_char;
+                if ((prevValue == null || prevValue.equals("(")) && nextValue.equals("-")) {
+                    prevValue = nextValue;
+                    continue;
+                }
+                prevValue = nextValue;
                 position_++;
                 break;
             } else if (cur_char == 's' || cur_char == 'c') {
@@ -31,23 +37,17 @@ public class Parser {
                     nextValue += expression_.charAt(position_);
                     position_++;
                 }
+                prevValue = nextValue;
                 break;
             } else {
                 continue;
             }
         }
-        if (nextValue.isEmpty()) {
-            return null;
-        } else if (OperationParser.maybeUnaryOperation(nextValue) != null ||
-                   OperationParser.maybeBinaryOperation(nextValue) != null ||
-                   nextValue.equals("(") || nextValue.equals(")")) {
-            return nextValue;
-        } else {
-            throw new IllegalArgumentException("Unavailable operation.");
-        }
+        return (nextValue.isEmpty()) ? null : nextValue;
     }
 
     final private String expression_;
     final private int size_;
     private static int position_;
+    private static String prevValue;
 }

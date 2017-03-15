@@ -16,6 +16,7 @@ public class EngineeringCalculator extends ArithmeticCalculator {
     public EngineeringCalculator() {
         super();
 
+        // add the all unary operations
         unaryOperations.put(UnaryOperationType.SIN, new SinOperation());
         unaryOperations.put(UnaryOperationType.COS, new CosOperation());
         unaryOperations.put(UnaryOperationType.SQRT, new SquareRootOperation());

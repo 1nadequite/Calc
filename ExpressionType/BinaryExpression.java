@@ -10,14 +10,14 @@ public class BinaryExpression implements Expression {
         this.right = right;
     }
 
-    // get left operand
+    // get the left operand
     public double getLeft() {
         return left;
     }
-    // get binary operation
+    // get the binary operation
     @Override
     public String getOperation() { return op; }
-    // get right operand
+    // get the right operand
     public double getRight() {
         return right;
     }

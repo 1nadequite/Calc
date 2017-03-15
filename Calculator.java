@@ -18,6 +18,7 @@ public class Calculator {
         Scanner reader = new Scanner(System.in);
         int calculatorType;
         while (true) {
+            System.out.print("Input calculator's type, please (1 - 3): ");
             calculatorType = reader.nextInt();
             if (CalculatorType.isValidType(calculatorType)) {
                 break;
@@ -49,10 +50,10 @@ public class Calculator {
                 double new_value;
                 Expression cur_exp;
                 UnaryExpression unary_exp;
+
                 if (line == null || line.equals(")") || OperationParser.maybeBinaryOperation(line) != null) {
-
                     cur_exp = exp.getNextExpression(line);
-
+                    // count next expression if it exists
                     while (cur_exp != null) {
                         if (OperationParser.maybeBinaryOperation(cur_exp.getOperation()) != null) {
                             new_value = calc.executeBinaryOperation((BinaryExpression) cur_exp);
@@ -67,12 +68,14 @@ public class Calculator {
                                 ? exp.getNextExpression(null)
                                 : exp.getNextExpression(line);
                     }
-
+                    // print the answer
                     if (line == null) {
-                        System.out.format("%s = %.5f", start_line, exp.getAnswer());
+                        double answer = exp.getAnswer();
+                        System.out.format("%s = ", start_line);
+                        if(answer == (long) answer) System.out.format("%d\n", (long)answer);
+                        else System.out.format("%.5f\n", answer);
                         break;
                     }
-
                 } else if (OperationParser.maybeUnaryOperation(line) != null || line.equals("(")) {
                     exp.addUnaryOperation(line);
                 } else {
